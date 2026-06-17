@@ -6,6 +6,7 @@ import Reviews from "@/components/Reviews";
 import LocationInfo from "@/components/LocationInfo";
 import SiteFooter from "@/components/SiteFooter";
 import StickyBar from "@/components/StickyBar";
+import { Analytics } from "@vercel/analytics/next"
 
 export default function Home() {
   return (

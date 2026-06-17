@@ -1,26 +1,79 @@
 @import "tailwindcss";
 
+@theme {
+  /* 신뢰·차분한 네이비/그레이 베이스 (테크 느낌 지양) */
+  --color-navy-50: #eef2f8;
+  --color-navy-100: #d6e0ef;
+  --color-navy-200: #adc0db;
+  --color-navy-300: #7e97ba;
+  --color-navy-400: #4f6f9c;
+  --color-navy-500: #3a567f;
+  --color-navy-600: #2b4368;
+  --color-navy-700: #21344f;
+  --color-navy-800: #1a2f4e;
+  --color-navy-900: #122139;
+  --color-navy-950: #0c1729;
+
+  /* 따뜻한 모래빛 포인트 (절제해서만 사용) */
+  --color-sand-400: #c9a96a;
+  --color-sand-500: #b8924a;
+  --color-sand-600: #9c7838;
+
+  --color-ink: #1f2733;
+  --color-muted: #5b6677;
+
+  --font-sans:
+    "Pretendard", "Pretendard Variable", -apple-system, BlinkMacSystemFont,
+    "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", system-ui, sans-serif;
+}
+
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #1f2733;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  /* 중장년 가독성: 기본 글자 약간 크게 + 넉넉한 행간 */
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: -0.01em;
+}
+
+/* 점(•) 타이핑 인디케이터 */
+@keyframes typing-bounce {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+  30% {
+    transform: translateY(-4px);
+    opacity: 1;
+  }
+}
+.typing-dot {
+  animation: typing-bounce 1.2s infinite ease-in-out;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fade-up {
+  animation: fade-up 0.35s ease-out both;
 }

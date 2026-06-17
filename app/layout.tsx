@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "김포 법무사 김관우 | 혼자 고민 마세요",
     description:
-      "법원 30년·전 인천법원 개인회생위원 김관우 법무사가 직접 상담합니다. 무료 15분 상담.",
+      "법원 30년·전 김포등기소장·전 인천법원 개인회생위원 김관우 법무사가 직접 상담합니다. 무료 15분 상담.",
     type: "website",
     locale: "ko_KR",
   },

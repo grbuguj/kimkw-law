@@ -21,11 +21,11 @@ export default function Reviews() {
           </p>
         </div>
 
-        <div className="mt-10 columns-1 gap-5 sm:mt-12 sm:columns-2">
+        <div className="mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] sm:mt-12 sm:block sm:columns-2 sm:gap-5 sm:overflow-visible sm:pb-0 [&::-webkit-scrollbar]:hidden">
           {reviews.map((r, i) => (
             <figure
               key={i}
-              className="mb-5 break-inside-avoid rounded-2xl border border-navy-100/70 bg-navy-50/40 p-5 sm:p-6"
+              className="w-[82%] shrink-0 snap-start rounded-2xl border border-navy-100/70 bg-navy-50/40 p-5 sm:mb-5 sm:w-auto sm:shrink sm:break-inside-avoid sm:p-6"
             >
               <span
                 className="block font-serif text-3xl leading-none text-navy-200"

@@ -24,7 +24,7 @@ export default function LocationInfo() {
         <p className="text-center text-sm font-semibold tracking-wide text-sand-600">
           오시는 길
         </p>
-        <h2 className="mt-2 text-center text-2xl font-bold tracking-tight text-navy-900 sm:text-3xl">
+        <h2 className="mt-2 text-center font-serif text-2xl font-bold tracking-tight text-navy-900 sm:text-3xl">
           오시는 길 · 상담 안내
         </h2>
 

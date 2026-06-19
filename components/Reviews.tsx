@@ -8,7 +8,7 @@ export default function Reviews() {
           <p className="text-sm font-semibold tracking-wide text-sand-600">
             네이버 후기
           </p>
-          <h2 className="mt-2 text-2xl font-bold tracking-tight text-navy-900 sm:text-3xl">
+          <h2 className="mt-2 font-serif text-2xl font-bold tracking-tight text-navy-900 sm:text-3xl">
             먼저 다녀가신 분들의 이야기
           </h2>
           <p className="mt-3 inline-flex items-center gap-2 text-[15px]">

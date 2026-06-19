@@ -27,7 +27,7 @@ export default function Consultation() {
       <div className="mx-auto w-full max-w-2xl">
         {/* 헤드라인 */}
         <div className="mb-8 text-center">
-          <h1 className="whitespace-pre-line text-2xl font-bold leading-snug text-white sm:text-3xl">
+          <h1 className="whitespace-pre-line font-serif text-2xl font-bold leading-snug text-white sm:text-3xl">
             {hero.headline}
           </h1>
           <p className="mx-auto mt-4 max-w-md text-[15px] leading-relaxed text-navy-100">

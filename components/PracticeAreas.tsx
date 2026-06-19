@@ -12,7 +12,7 @@ export default function PracticeAreas() {
         <p className="text-center text-sm font-semibold tracking-wide text-sand-600">
           상담 분야
         </p>
-        <h2 className="mt-2 text-center text-2xl font-bold tracking-tight text-navy-900 sm:text-3xl">
+        <h2 className="mt-2 text-center font-serif text-2xl font-bold tracking-tight text-navy-900 sm:text-3xl">
           이런 일들을 도와드립니다
         </h2>
         <p className="mt-3 text-center text-[15px] text-muted">

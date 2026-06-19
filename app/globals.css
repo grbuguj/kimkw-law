@@ -1,6 +1,9 @@
 @import "tailwindcss";
 
 @theme {
+  /* 제목용 명조 — 신뢰·권위감 (마루 부리, 본문은 Pretendard 유지) */
+  --font-serif: "마루 부리", "MaruBuri", "Nanum Myeongjo", serif;
+
   /* 신뢰·차분한 네이비/그레이 베이스 (테크 느낌 지양) */
   --color-navy-50: #eef2f8;
   --color-navy-100: #d6e0ef;

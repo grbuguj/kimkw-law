@@ -36,6 +36,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
+      <head>
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/@kfonts/maruburi@0.1.0/index.css"
+        />
+      </head>
       <body className="min-h-dvh bg-white text-ink antialiased">
         {children}
       </body>

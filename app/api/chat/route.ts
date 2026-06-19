@@ -5,14 +5,13 @@ import {
   type Provider,
   type LLMMessage,
 } from "@/lib/llm";
+import { supabase } from "@/lib/supabase";
 
-// 키 사용·스트리밍이 필요하므로 항상 동적 실행 (캐시 금지)
 export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
 
-const MAX_MESSAGES = 20; // 과도한 컨텍스트 방지
+const MAX_MESSAGES = 20;
 const VALID_PROVIDERS: Provider[] = ["gemini", "groq", "claude"];
-// 비교 후 확정되면 여기만 바꾸면 메인 채팅 기본값이 바뀐다.
 const DEFAULT_PROVIDER: Provider = "groq";
 
 function sanitize(messages: unknown): LLMMessage[] {
@@ -30,6 +29,32 @@ function sanitize(messages: unknown): LLMMessage[] {
     .map((m) => ({ role: m.role, content: m.content.slice(0, 4000) }));
 }
 
+async function saveConversation(
+  sessionId: string,
+  messages: LLMMessage[],
+  assistantReply: string,
+  ip: string | null,
+  userAgent: string | null,
+) {
+  const full = [
+    ...messages,
+    { role: "assistant" as const, content: assistantReply },
+  ];
+  try {
+    await supabase.from("conversations").upsert(
+      {
+        session_id: sessionId,
+        messages: full,
+        ip,
+        user_agent: userAgent,
+      },
+      { onConflict: "session_id" },
+    );
+  } catch (e) {
+    console.error("[saveConversation] failed:", e);
+  }
+}
+
 export async function POST(request: Request) {
   let body: unknown;
   try {
@@ -38,7 +63,11 @@ export async function POST(request: Request) {
     return Response.json({ error: "잘못된 요청입니다." }, { status: 400 });
   }
 
-  const raw = body as { messages?: unknown; provider?: unknown };
+  const raw = body as {
+    messages?: unknown;
+    provider?: unknown;
+    sessionId?: unknown;
+  };
   const provider: Provider = VALID_PROVIDERS.includes(raw?.provider as Provider)
     ? (raw.provider as Provider)
     : DEFAULT_PROVIDER;
@@ -47,6 +76,15 @@ export async function POST(request: Request) {
   if (messages.length === 0 || messages[messages.length - 1].role !== "user") {
     return Response.json({ error: "메시지가 비어 있습니다." }, { status: 400 });
   }
+
+  const sessionId =
+    typeof raw?.sessionId === "string" && raw.sessionId.length > 0
+      ? raw.sessionId
+      : crypto.randomUUID();
+
+  const ip =
+    request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ?? null;
+  const userAgent = request.headers.get("user-agent") ?? null;
 
   if (!hasKey(provider)) {
     return Response.json(
@@ -59,13 +97,18 @@ export async function POST(request: Request) {
   }
 
   const encoder = new TextEncoder();
+  let assistantReply = "";
+
   const stream = new ReadableStream<Uint8Array>({
     async start(controller) {
       try {
         await streamLLM(provider, messages, (text) => {
+          assistantReply += text;
           controller.enqueue(encoder.encode(text));
         });
         controller.close();
+        // 스트리밍 완료 후 비동기 저장 (응답 지연 없음)
+        void saveConversation(sessionId, messages, assistantReply, ip, userAgent);
       } catch (err) {
         console.error(`[/api/chat] ${provider} stream error:`, err);
         const note =

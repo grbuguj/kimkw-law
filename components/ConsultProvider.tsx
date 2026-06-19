@@ -4,6 +4,7 @@ import {
   createContext,
   useCallback,
   useContext,
+  useMemo,
   useRef,
   useState,
 } from "react";
@@ -52,6 +53,8 @@ export function ConsultProvider({ children }: { children: React.ReactNode }) {
   const [showDiagnosis, setShowDiagnosis] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const abortRef = useRef<AbortController | null>(null);
+  // 페이지 로드 시 세션 ID 생성 — 같은 세션의 대화를 하나의 행으로 묶어 DB에 저장
+  const sessionId = useMemo(() => crypto.randomUUID(), []);
 
   const run = useCallback(
     async (nextMessages: ChatMessage[]) => {
@@ -79,7 +82,7 @@ export function ConsultProvider({ children }: { children: React.ReactNode }) {
               return copy;
             });
           },
-          { signal: controller.signal },
+          { signal: controller.signal, sessionId },
         );
       } catch (err) {
         const msg =

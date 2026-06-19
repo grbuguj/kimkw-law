@@ -1,4 +1,5 @@
 import { booking, office } from "@/lib/siteContent";
+import NaverMap from "./NaverMap";
 
 function InfoRow({
   label,
@@ -28,7 +29,9 @@ export default function LocationInfo() {
           오시는 길 · 상담 안내
         </h2>
 
-        <div className="mt-10 grid gap-6 sm:mt-12 sm:grid-cols-2 sm:gap-8">
+        <NaverMap />
+
+        <div className="mt-6 grid gap-6 sm:grid-cols-2 sm:gap-8">
           {/* 위치 */}
           <div className="rounded-2xl border border-navy-100 bg-white p-6 shadow-[0_1px_2px_rgba(18,33,57,0.04)]">
             <div className="divide-y divide-navy-100">

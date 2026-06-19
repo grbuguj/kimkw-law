@@ -118,16 +118,18 @@ export default function Consultation() {
               className="inline-flex shrink-0 items-center gap-1.5 rounded-xl bg-navy-800 px-5 py-3 font-semibold text-white transition hover:bg-navy-900 active:scale-[0.99]"
             >
               <SendIcon />
-              상담 시작
+              물어보기
             </button>
           </div>
         </div>
 
-        {/* 빠른 질문 칩 */}
-        <p className="mt-4 text-center text-[13px] text-navy-200/90">
-          아래를 눌러 바로 물어보셔도 됩니다
+        {/* 안심 문구 */}
+        <p className="mt-4 text-center text-[13px] leading-relaxed text-navy-200/90">
+          무료예요. 이름·연락처 없이, 가볍게 한마디만 적어보셔도 괜찮습니다.
         </p>
-        <div className="mt-2 flex flex-wrap justify-center gap-2">
+
+        {/* 빠른 질문 칩 */}
+        <div className="mt-3 flex flex-wrap justify-center gap-2">
           {hero.quickQuestions.map((q) => (
             <button
               key={q}

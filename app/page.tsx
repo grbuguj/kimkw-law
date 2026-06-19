@@ -6,6 +6,7 @@ import Reviews from "@/components/Reviews";
 import LocationInfo from "@/components/LocationInfo";
 import SiteFooter from "@/components/SiteFooter";
 import StickyBar from "@/components/StickyBar";
+import ChatPanel from "@/components/ChatPanel";
 import { Analytics } from "@vercel/analytics/next"
 
 export default function Home() {
@@ -21,6 +22,7 @@ export default function Home() {
         <SiteFooter />
       </main>
       <StickyBar />
+      <ChatPanel />
     </ConsultProvider>
   );
 }

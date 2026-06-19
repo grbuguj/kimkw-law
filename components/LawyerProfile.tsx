@@ -11,12 +11,12 @@ function Stars() {
 
 export default function LawyerProfile() {
   return (
-    <section id="profile" className="bg-white px-4 py-14">
+    <section id="profile" className="bg-white px-4 py-16 sm:py-20">
       <div className="mx-auto w-full max-w-3xl">
         <p className="text-center text-sm font-semibold tracking-wide text-sand-600">
           김포에서 가장 오래, 가장 가까이
         </p>
-        <h2 className="mt-2 text-center text-2xl font-bold text-navy-900 sm:text-3xl">
+        <h2 className="mt-2 text-center font-serif text-2xl font-bold tracking-tight text-navy-900 sm:text-3xl">
           {office.lawyer}가 직접 상담합니다
         </h2>
 
@@ -34,16 +34,18 @@ export default function LawyerProfile() {
               다릅니다. 저는 개인회생을 <strong>심사하던 자리</strong>에
               있었습니다. 그래서 무엇이 받아들여지고 무엇이 어려운지를 압니다.
             </p>
-            <p className="mt-3 text-[15px] leading-relaxed text-ink">
+            <p className="mt-3 hidden text-[15px] leading-relaxed text-ink sm:block">
               겁먹지 않으셔도 됩니다. 여기까지 알아보신 것만으로 이미 잘하고
               계신 겁니다. 나머지는 제가 함께 보겠습니다.
             </p>
 
-            <ul className="mt-5 space-y-2.5">
+            <ul className="mt-5 grid grid-cols-2 gap-x-3 gap-y-2 sm:block sm:space-y-2.5">
               {career.map((c) => (
-                <li key={c.title} className="flex gap-2.5">
-                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-sand-500" />
-                  <span className="text-[15px] text-navy-800">{c.title}</span>
+                <li key={c.title} className="flex gap-2">
+                  <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-sand-500 sm:mt-2" />
+                  <span className="text-[13px] text-navy-800 sm:text-[15px]">
+                    {c.title}
+                  </span>
                 </li>
               ))}
             </ul>

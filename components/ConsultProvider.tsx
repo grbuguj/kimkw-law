@@ -23,8 +23,12 @@ interface ConsultState {
   error: string | null;
   started: boolean;
   showDiagnosis: boolean;
+  /** 풀스크린 상담 패널 노출 여부 */
+  isOpen: boolean;
+  open: () => void;
+  close: () => void;
   send: (text: string) => void;
-  /** 외부(업무분야/빠른질문 칩)에서 질문을 보내고 상담창으로 스크롤 */
+  /** 외부(업무분야/빠른질문 칩)에서 질문을 보내고 상담창을 연다 */
   ask: (text: string) => void;
   openDiagnosis: () => void;
   closeDiagnosis: () => void;
@@ -39,13 +43,6 @@ export function useConsult() {
   return ctx;
 }
 
-function scrollToConsult() {
-  if (typeof document === "undefined") return;
-  document
-    .getElementById("consult")
-    ?.scrollIntoView({ behavior: "smooth", block: "start" });
-}
-
 const REHAB_KEYWORDS = ["회생", "파산", "빚", "채무", "변제", "연체", "대출"];
 
 export function ConsultProvider({ children }: { children: React.ReactNode }) {
@@ -53,6 +50,7 @@ export function ConsultProvider({ children }: { children: React.ReactNode }) {
   const [status, setStatus] = useState<"idle" | "streaming">("idle");
   const [error, setError] = useState<string | null>(null);
   const [showDiagnosis, setShowDiagnosis] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const abortRef = useRef<AbortController | null>(null);
 
   const run = useCallback(
@@ -110,6 +108,7 @@ export function ConsultProvider({ children }: { children: React.ReactNode }) {
     (text: string) => {
       const trimmed = text.trim();
       if (!trimmed || status === "streaming") return;
+      setIsOpen(true);
       const next: ChatMessage[] = [
         ...messages,
         { role: "user", content: trimmed },
@@ -125,7 +124,7 @@ export function ConsultProvider({ children }: { children: React.ReactNode }) {
 
   const ask = useCallback(
     (text: string) => {
-      scrollToConsult();
+      setIsOpen(true);
       send(text);
     },
     [send],
@@ -155,11 +154,14 @@ export function ConsultProvider({ children }: { children: React.ReactNode }) {
     error,
     started: messages.length > 0,
     showDiagnosis,
+    isOpen,
+    open: () => setIsOpen(true),
+    close: () => setIsOpen(false),
     send,
     ask,
     openDiagnosis: () => {
       setShowDiagnosis(true);
-      scrollToConsult();
+      setIsOpen(true);
     },
     closeDiagnosis: () => setShowDiagnosis(false),
     submitDiagnosis,

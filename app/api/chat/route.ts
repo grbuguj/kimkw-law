@@ -41,15 +41,19 @@ async function saveConversation(
     { role: "assistant" as const, content: assistantReply },
   ];
   try {
-    await supabase.from("conversations").upsert(
-      {
+    const { error } = await supabase.from("conversations").upsert(
+      { session_id: sessionId, messages: full, ip, user_agent: userAgent },
+      { onConflict: "session_id" },
+    );
+    if (error) {
+      // UNIQUE 제약조건 없으면 insert로 폴백
+      await supabase.from("conversations").insert({
         session_id: sessionId,
         messages: full,
         ip,
         user_agent: userAgent,
-      },
-      { onConflict: "session_id" },
-    );
+      });
+    }
   } catch (e) {
     console.error("[saveConversation] failed:", e);
   }

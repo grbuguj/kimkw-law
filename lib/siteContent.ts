@@ -12,7 +12,6 @@ export const office = {
   address: "경기 김포시 사우중로 17 나동 1층 102호",
   addressShort: "김포 사우중로 17, 나동 1층 102호",
   transit: "김포골드라인 사우역 3번 출구에서 372m",
-  // TODO(사용자 제공): 정확한 영업시간 확정값으로 교체
   hours: "평일 09:00 ~ 18:00 (점심 12:00 ~ 13:00 휴게) · 주말·공휴일 휴무",
   // 네이버 플레이스 (place id: 1541065273)
   naverMapUrl: "https://map.naver.com/p/entry/place/1541065273",
@@ -40,7 +39,7 @@ export const booking = {
 export const hero = {
   headline: "혼자 고민하지 마세요.\n무엇이든 편하게 물어보세요.",
   subhead:
-    "법원 30년 · 전 김포 등기소장 · 인천법원 개인회생위원 김관우 법무사가 상담을 확인합니다.",
+    "AI 상담 도우미가 먼저 편하게 답해드려요. 정확한 건 법원 30년 경력의 김관우 법무사가 직접 상담에서 확인해 드립니다.",
   inputPlaceholder: "예: 개인회생, 가능할지 궁금해요…",
   // 진입 즉시 보이는 빠른 질문 칩
   quickQuestions: [

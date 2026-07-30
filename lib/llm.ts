@@ -23,7 +23,7 @@ const TEMPERATURE = 0.7;
 
 // 무료 등급 모델 (필요 시 여기만 바꾸면 됨)
 const GEMINI_MODEL = "gemini-2.5-flash";
-const GROQ_MODEL = "qwen/qwen3-32b"; // 대안: llama-3.3-70b-versatile, moonshotai/kimi-k2-instruct
+const GROQ_MODEL = "qwen/qwen3.6-27b"; // 대안: llama-3.3-70b-versatile, moonshotai/kimi-k2-instruct
 const CLAUDE_MODEL = "claude-sonnet-4-6";
 
 export function hasKey(provider: Provider): boolean {

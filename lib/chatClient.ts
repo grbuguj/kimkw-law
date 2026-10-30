@@ -7,7 +7,6 @@ export interface ChatMessage {
 export interface StreamOptions {
   provider?: string; // "gemini" | "groq" | "claude" (생략 시 서버 기본값)
   signal?: AbortSignal;
-  sessionId?: string;
 }
 
 /**
@@ -22,7 +21,7 @@ export async function streamChat(
   const res = await fetch("/api/chat", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ messages, provider: opts.provider, sessionId: opts.sessionId }),
+    body: JSON.stringify({ messages, provider: opts.provider }),
     signal: opts.signal,
   });
 

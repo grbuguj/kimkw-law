@@ -54,10 +54,6 @@ export default function ChatPanel() {
     setDraft("");
   };
 
-  const lastIsAssistant =
-    messages.length > 0 && messages[messages.length - 1].role === "assistant";
-  const showCta = status === "idle" && lastIsAssistant;
-
   return (
     <div
       role="dialog"
@@ -135,15 +131,6 @@ export default function ChatPanel() {
 
         {showDiagnosis && <DiagnosisForm />}
 
-        {showCta && (
-          <div className="animate-fade-up pt-1">
-            <p className="mb-2 text-center text-sm text-muted">
-              더 정확한 건 직접 들어보시는 게 마음이 편하실 거예요.
-            </p>
-            <CtaButtons variant="compact" />
-          </div>
-        )}
-
         {error && (
           <p className="rounded-lg bg-rose-50 px-3 py-2 text-sm text-rose-700">
             {error}
@@ -157,6 +144,15 @@ export default function ChatPanel() {
         style={{ paddingBottom: "max(0.75rem, env(safe-area-inset-bottom))" }}
       >
         <div className="mx-auto w-full max-w-2xl">
+          {/* 대화 시작 후 상담 예약·전화 버튼은 입력창 위에 고정 */}
+          {started && (
+            <div className="animate-fade-up mb-3">
+              <p className="mb-2 text-center text-sm text-muted">
+                더 정확한 건 직접 들어보시는 게 마음이 편하실 거예요.
+              </p>
+              <CtaButtons variant="compact" />
+            </div>
+          )}
           <div className="flex items-end gap-2">
             <textarea
               ref={inputRef}

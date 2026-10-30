@@ -23,7 +23,7 @@ const TEMPERATURE = 0.7;
 
 // 무료 등급 모델 (필요 시 여기만 바꾸면 됨)
 const GEMINI_MODEL = "gemini-2.5-flash";
-const GROQ_MODEL = "qwen/qwen3.8-27b"; // 대안: openai/gpt-oss-120b
+const GROQ_MODEL = "openai/gpt-oss-120b"; // qwen/qwen3.8-27b 는 무료 등급 출력 한도(분당 1000토큰)가 낮아 다중 사용자에 부적합
 const CLAUDE_MODEL = "claude-sonnet-4-6";
 
 export function hasKey(provider: Provider): boolean {

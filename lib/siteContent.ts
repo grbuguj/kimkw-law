@@ -17,23 +17,11 @@ export const office = {
   naverMapUrl: "https://map.naver.com/p/entry/place/1541065273",
 } as const;
 
-// 네이버 예약은 단일 진입(플레이스 예약 페이지)으로 통일.
-// 사용자가 예약 페이지에서 무료/법률 상품을 직접 선택한다.
-const BOOKING_URL =
-  "https://map.naver.com/p/entry/place/1541065273?placePath=/ticket";
-
-/** 상담 2종 안내 (버튼은 동일한 네이버 예약 페이지로 연결) */
+/** 상담 예약 안내 (네이버 플레이스 예약 페이지로 연결) */
 export const booking = {
-  free: {
-    label: "무료 상담 예약",
-    detail: "15분 · 무료",
-    url: BOOKING_URL,
-  },
-  paid: {
-    label: "법률 상담 예약",
-    detail: "30분 · 5만원 (수임 시 면제)",
-    url: BOOKING_URL,
-  },
+  label: "상담 예약",
+  detail: "30분 · 5만원 (수임 시 면제)",
+  url: "https://map.naver.com/p/entry/place/1541065273?placePath=/ticket",
 } as const;
 
 export const hero = {
@@ -45,7 +33,7 @@ export const hero = {
   quickQuestions: [
     "개인회생, 저도 될까요?",
     "파산이랑 개인회생, 뭐가 달라요?",
-    "상담은 무료인가요?",
+    "상담 비용이 궁금해요",
     "등기 비용이 궁금해요",
   ],
 } as const;
@@ -142,7 +130,7 @@ export const reviews: { body: string; author: string }[] = [
 ];
 
 export const cta = {
-  bookFree: "무료 15분 상담 예약",
+  book: "상담 예약",
   call: "전화하기",
   callShort: "전화",
   bookShort: "예약하기",

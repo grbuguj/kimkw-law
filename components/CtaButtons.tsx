@@ -36,7 +36,7 @@ function CalendarIcon() {
 }
 
 /**
- * 상황별 CTA: [무료 15분 상담 예약] [전화하기]
+ * 상황별 CTA: [상담 예약] [전화하기]
  * variant="inline" — 채팅 답변 하단용, "compact" — 좁은 영역용.
  */
 export default function CtaButtons({
@@ -48,13 +48,13 @@ export default function CtaButtons({
   return (
     <div className="flex flex-col gap-2.5 sm:flex-row">
       <a
-        href={booking.free.url}
+        href={booking.url}
         target="_blank"
         rel="noopener noreferrer"
         className={`inline-flex flex-1 items-center justify-center gap-2 rounded-xl bg-navy-800 font-semibold text-white shadow-sm transition hover:bg-navy-900 active:scale-[0.99] ${size}`}
       >
         <CalendarIcon />
-        {cta.bookFree}
+        {cta.book}
       </a>
       <a
         href={office.phoneHref}

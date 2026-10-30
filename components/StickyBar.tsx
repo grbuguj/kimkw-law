@@ -29,12 +29,12 @@ export default function StickyBar() {
           {cta.call}
         </a>
         <a
-          href={booking.free.url}
+          href={booking.url}
           target="_blank"
           rel="noopener noreferrer"
           className="flex flex-[1.3] items-center justify-center gap-1.5 rounded-xl bg-navy-800 py-3 font-semibold text-white active:scale-[0.99]"
         >
-          무료 15분 예약
+          {cta.book}
         </a>
       </div>
     </div>

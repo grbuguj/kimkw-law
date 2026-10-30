@@ -70,45 +70,25 @@ export default function LocationInfo() {
             </a>
           </div>
 
-          {/* 예약 2종 */}
+          {/* 상담 예약 */}
           <div className="flex flex-col gap-4">
             <div className="rounded-2xl border-2 border-navy-800 bg-white p-6 shadow-[0_12px_30px_-12px_rgba(18,33,57,0.25)]">
               <div className="flex items-baseline justify-between gap-2">
-                <h3 className="text-lg font-bold text-navy-900">무료 상담</h3>
+                <h3 className="text-lg font-bold text-navy-900">상담 예약</h3>
                 <span className="shrink-0 rounded-full bg-navy-50 px-2.5 py-0.5 text-sm font-semibold text-sand-600">
-                  {booking.free.detail}
-                </span>
-              </div>
-              <p className="mt-1.5 text-sm leading-relaxed text-muted">
-                지금 가장 걱정되시는 것만 가볍게 여쭤보세요. 부담 없이.
-              </p>
-              <a
-                href={booking.free.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-3 inline-flex w-full items-center justify-center rounded-xl bg-navy-800 py-3 font-semibold text-white transition hover:bg-navy-900"
-              >
-                {booking.free.label}
-              </a>
-            </div>
-
-            <div className="rounded-2xl border border-navy-100 bg-white p-6">
-              <div className="flex items-baseline justify-between gap-2">
-                <h3 className="text-lg font-bold text-navy-900">법률 상담</h3>
-                <span className="text-sm font-semibold text-muted">
-                  {booking.paid.detail}
+                  {booking.detail}
                 </span>
               </div>
               <p className="mt-1.5 text-sm leading-relaxed text-muted">
                 서류를 놓고 깊이 있게. 수임으로 이어지면 상담료는 면제됩니다.
               </p>
               <a
-                href={booking.paid.url}
+                href={booking.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-3 inline-flex w-full items-center justify-center rounded-xl border-2 border-navy-800 py-3 font-semibold text-navy-800 transition hover:bg-navy-50"
+                className="mt-3 inline-flex w-full items-center justify-center rounded-xl bg-navy-800 py-3 font-semibold text-white transition hover:bg-navy-900"
               >
-                {booking.paid.label}
+                {booking.label}
               </a>
             </div>
           </div>

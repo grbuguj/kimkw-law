@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { siteUrl } from "@/lib/siteContent";
 import { JsonLd } from "@/lib/jsonLd";
+import Tracker from "@/components/analytics/Tracker";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -51,6 +52,7 @@ export default function RootLayout({
       </head>
       <body className="min-h-dvh bg-white text-ink antialiased">
         <JsonLd />
+        <Tracker />
         {children}
       </body>
     </html>

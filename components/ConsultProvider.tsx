@@ -8,6 +8,8 @@ import {
   useState,
 } from "react";
 import { streamChat, type ChatMessage } from "@/lib/chatClient";
+import { classifyTopic } from "@/lib/analytics/events";
+import { track } from "@/lib/analytics/track";
 
 export interface DiagnosisInput {
   income: string;
@@ -23,6 +25,8 @@ interface ConsultState {
   error: string | null;
   started: boolean;
   showDiagnosis: boolean;
+  /** 회생·파산 관련 질문 후, 진단을 '제안'하는 작은 카드 노출 여부 */
+  diagnosisOffered: boolean;
   /** 풀스크린 상담 패널 노출 여부 */
   isOpen: boolean;
   open: () => void;
@@ -50,6 +54,8 @@ export function ConsultProvider({ children }: { children: React.ReactNode }) {
   const [status, setStatus] = useState<"idle" | "streaming">("idle");
   const [error, setError] = useState<string | null>(null);
   const [showDiagnosis, setShowDiagnosis] = useState(false);
+  const [diagnosisOffered, setDiagnosisOffered] = useState(false);
+  const [diagnosisDone, setDiagnosisDone] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const abortRef = useRef<AbortController | null>(null);
 
@@ -109,17 +115,24 @@ export function ConsultProvider({ children }: { children: React.ReactNode }) {
       const trimmed = text.trim();
       if (!trimmed || status === "streaming") return;
       setIsOpen(true);
+      // 통계: 원문은 보내지 않고 주제 분류값만
+      if (messages.length === 0) track({ type: "chat_start" });
+      track({ type: "chat_message", topic: classifyTopic(trimmed) });
       const next: ChatMessage[] = [
         ...messages,
         { role: "user", content: trimmed },
       ];
-      // 회생/파산 관련이면 간이진단 폼을 노출 (아직 폼을 안 본 경우)
-      if (REHAB_KEYWORDS.some((k) => trimmed.includes(k))) {
-        setShowDiagnosis(true);
+      // 회생/파산 관련이면 진단 폼을 바로 펼치지 않고, 답변 뒤에 작은 제안 카드만 띄운다
+      if (
+        !diagnosisDone &&
+        !showDiagnosis &&
+        REHAB_KEYWORDS.some((k) => trimmed.includes(k))
+      ) {
+        setDiagnosisOffered(true);
       }
       void run(next);
     },
-    [messages, status, run],
+    [messages, status, run, diagnosisDone, showDiagnosis],
   );
 
   const ask = useCallback(
@@ -143,10 +156,16 @@ export function ConsultProvider({ children }: { children: React.ReactNode }) {
         "제가 개인회생 대상이 될 수 있을지 대략적으로 봐주실 수 있나요?",
       ].filter(Boolean);
       setShowDiagnosis(false);
+      setDiagnosisOffered(false);
+      setDiagnosisDone(true);
+      track({ type: "diagnosis_submit" });
       ask(lines.join("\n"));
     },
     [ask],
   );
+
+  const open = useCallback(() => setIsOpen(true), []);
+  const close = useCallback(() => setIsOpen(false), []);
 
   const value: ConsultState = {
     messages,
@@ -154,13 +173,16 @@ export function ConsultProvider({ children }: { children: React.ReactNode }) {
     error,
     started: messages.length > 0,
     showDiagnosis,
+    diagnosisOffered,
     isOpen,
-    open: () => setIsOpen(true),
-    close: () => setIsOpen(false),
+    open,
+    close,
     send,
     ask,
     openDiagnosis: () => {
+      track({ type: "diagnosis_open" });
       setShowDiagnosis(true);
+      setDiagnosisOffered(false);
       setIsOpen(true);
     },
     closeDiagnosis: () => setShowDiagnosis(false),

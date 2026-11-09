@@ -8,7 +8,7 @@ export default function StickyBar() {
   const { isOpen } = useConsult();
   if (isOpen) return null;
   return (
-    <div className="fixed inset-x-0 bottom-0 z-40 border-t border-navy-100 bg-white/95 px-3 py-2.5 backdrop-blur sm:hidden">
+    <div data-track-loc="sticky" className="fixed inset-x-0 bottom-0 z-40 border-t border-navy-100 bg-white/95 px-3 py-2.5 backdrop-blur sm:hidden">
       <div className="mx-auto flex max-w-md gap-2.5">
         <a
           href={office.phoneHref}

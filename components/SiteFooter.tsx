@@ -1,4 +1,4 @@
-import { office } from "@/lib/siteContent";
+import { office, seo } from "@/lib/siteContent";
 import Disclaimer from "./Disclaimer";
 
 export default function SiteFooter() {
@@ -17,6 +17,9 @@ export default function SiteFooter() {
           </p>
           <p>{office.hours}</p>
         </div>
+        <p className="mt-4 text-[13px] leading-relaxed text-navy-300">
+          {seo.summary}
+        </p>
         <div className="mt-5 border-t border-navy-700 pt-4">
           <Disclaimer className="text-navy-300" />
         </div>

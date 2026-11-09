@@ -4,6 +4,18 @@
  * 문구·연락처·경력·리뷰를 모두 여기서 관리한다.
  */
 
+/**
+ * 사이트 기본 URL (sitemap·robots·JSON-LD·canonical에 사용).
+ * 도메인 연결 후 Vercel 환경변수 NEXT_PUBLIC_SITE_URL=https://도메인 으로 지정.
+ * 미지정 시 Vercel 프로덕션 주소 → 로컬 순으로 대체.
+ */
+export const siteUrl = (
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : "http://localhost:3000")
+).replace(/\/$/, "");
+
 export const office = {
   name: "법무사김관우사무소",
   lawyer: "김관우 법무사",
@@ -22,6 +34,16 @@ export const booking = {
   label: "상담 예약",
   detail: "30분 · 5만원 (수임 시 면제)",
   url: "https://map.naver.com/p/entry/place/1541065273?placePath=/ticket",
+} as const;
+
+/**
+ * 검색엔진·AI가 그대로 인용할 수 있도록 쓴 사실 문장.
+ * (감성 문구가 아니라 '누가·어디서·무엇을·왜'를 한 번에 담는다)
+ */
+export const seo = {
+  eyebrow: "김포 법무사 김관우 · 전 김포등기소장 · 법원 30년",
+  summary:
+    "법무사김관우사무소는 경기 김포시 사우중로 17(김포골드라인 사우역 인근)에 있는 법무사 사무소입니다. 김관우 법무사는 법원에서 30년 근무한 뒤 명예퇴직했으며, 김포등기소장과 인천법원 개인회생위원을 지냈습니다. 개인회생·파산, 부동산·법인 등기, 상속·증여, 지급명령, 성년후견, 민사·가사 사건을 직접 상담합니다.",
 } as const;
 
 export const hero = {

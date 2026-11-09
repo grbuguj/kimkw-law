@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useConsult } from "./ConsultProvider";
-import { hero } from "@/lib/siteContent";
+import { hero, seo } from "@/lib/siteContent";
 import Disclaimer from "./Disclaimer";
 
 function SendIcon() {
@@ -87,6 +87,9 @@ export default function Consultation() {
       <div className="mx-auto w-full max-w-2xl">
         {/* 헤드라인 */}
         <div className="mb-8 text-center">
+          <p className="mb-3 text-[13px] font-semibold tracking-wide text-sand-400 sm:text-sm">
+            {seo.eyebrow}
+          </p>
           <h1 className="whitespace-pre-line font-serif text-2xl font-bold leading-snug text-white sm:text-3xl">
             {hero.headline}
           </h1>

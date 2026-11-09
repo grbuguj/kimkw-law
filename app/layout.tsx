@@ -1,7 +1,11 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import { siteUrl } from "@/lib/siteContent";
+import { JsonLd } from "@/lib/jsonLd";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
+  alternates: { canonical: "/" },
   title: "김포 법무사 김관우 | 개인회생·파산·등기 상담예약",
   description:
     "법원 30년·전 김포등기소장·전 인천법원 개인회생위원 김관우 법무사가 직접 상담합니다. 개인회생, 파산, 등기, 상속 — 혼자 고민 마시고 편하게 물어보세요.",
@@ -12,6 +16,8 @@ export const metadata: Metadata = {
     "김관우 법무사",
     "사우역 법무사",
     "김포 등기",
+    "김포 상속등기",
+    "김포등기소장 출신 법무사",
   ],
   openGraph: {
     title: "김포 법무사 김관우 | 혼자 고민 마세요",
@@ -21,6 +27,7 @@ export const metadata: Metadata = {
     locale: "ko_KR",
   },
   robots: { index: true, follow: true },
+  verification: { google: "uh-GkilYyPjW57wWJuBCuwAJbyp5_Pap1OPKsuGdtvY" },
 };
 
 export const viewport: Viewport = {
@@ -43,6 +50,7 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-dvh bg-white text-ink antialiased">
+        <JsonLd />
         {children}
       </body>
     </html>

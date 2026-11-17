@@ -12,7 +12,7 @@ export const office = {
   address: "경기 김포시 사우중로 17 나동 1층 102호",
   addressShort: "김포 사우중로 17, 나동 1층 102호",
   transit: "김포골드라인 사우역 3번 출구에서 372m",
-  hours: "평일 09:00 ~ 18:00 (점심 12:00 ~ 13:00 휴게) · 주말·공휴일 휴무",
+  hours: "평일 09:30 ~ 17:00 (12:00 ~ 13:00 휴게) · 토·일 휴무",
   // 네이버 플레이스 (place id: 1541065273)
   naverMapUrl: "https://map.naver.com/p/entry/place/1541065273",
 } as const;
@@ -20,8 +20,8 @@ export const office = {
 /** 상담 예약 안내 (네이버 플레이스 예약 페이지로 연결) */
 export const booking = {
   label: "상담 예약",
-  detail: "30분 · 5만원 (수임 시 면제)",
-  url: "https://map.naver.com/p/entry/place/1541065273?placePath=/ticket",
+  detail: "상담료는 예약 화면에서 확인해 주세요 (사건 의뢰 시 면제)",
+  url: "https://m.booking.naver.com/booking/6/bizes/1342532/items/6514538",
 } as const;
 
 export const hero = {
@@ -138,3 +138,4 @@ export const cta = {
 
 export const disclaimer =
   "본 상담은 일반적인 법률 정보 제공을 위한 것으로 법률 자문이 아니며, 구체적 사안은 반드시 법무사 상담을 통해 확인하시기 바랍니다.";
+
